@@ -1,0 +1,66 @@
+---
+access_control_allow_credentials:
+access_control_allow_headers:
+access_control_allow_methods: 
+cache_control: 
+changed: false
+connection: 
+content:
+content_length:
+content_type:
+cookies: {}
+cookies_string: ''
+date: 
+elapsed: 
+expires: ''
+failed: 
+json:
+    errorDetailsResponse:
+    paginationResponseRecord:
+        lastIndex: ''
+        pageIndex: ''
+        pageRecords: ''
+        selfLink: 
+        title: Software Suggestions
+        totalRecords: ''
+    productList:
+    -   id: ''
+        product:
+            basePID:
+            mdfId: 
+            productName:
+            softwareType: 
+        suggestions:
+        -   errorDetailsResponse: null
+            id: ''
+            images:
+            -   description: ''
+                featureSet:
+                imageName: 
+                imageSize: 
+                requiredDRAM:
+                requiredFlash:
+            isSuggested: 
+            majorRelease: ''
+            relDispName: 
+            releaseDate: 
+            releaseFormat1:
+            releaseFormat2:
+            releaseLifeCycle:
+            releaseTrain: 
+            trainDispName: 
+    status: 
+msg: 
+pragma:
+redirected:
+status: 
+strict_transport_security:
+url:
+warnings:
+x_content_type_options:
+x_envoy_upstream_service_time: 
+x_frame_options:
+x_mashery_message_id:
+x_request_id: 
+x_rp_ssl_name: 
+x_xss_protection:

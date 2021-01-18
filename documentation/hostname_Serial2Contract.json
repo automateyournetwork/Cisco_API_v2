@@ -1,0 +1,132 @@
+{
+    "changed":,
+    "msg": "",
+    "results": [
+        {
+            "access_control_allow_credentials": "",
+            "access_control_allow_headers": "",
+            "access_control_allow_methods": "",
+            "ansible_loop_var": "",
+            "cache_control": "",
+            "changed": ,
+            "connection": "",
+            "content": "",
+            "content_type": "",
+            "cookies": {},
+            "cookies_string": "",
+            "date": "",
+            "elapsed": ,
+            "failed": ,
+            "invocation": {
+                "module_args": {
+                    "attributes": ,
+                    "backup": ,
+                    "body": ,
+                    "body_format": "",
+                    "client_cert": ,
+                    "client_key": ,
+                    "content": ,
+                    "creates": ,
+                    "delimiter": ,
+                    "dest": ,
+                    "directory_mode": ,
+                    "follow": ,
+                    "follow_redirects": "",
+                    "force": ,
+                    "force_basic_auth": ,
+                    "group": ,
+                    "headers": {
+                        "Accept": "",
+                        "Accept-Encoding": "",
+                        "Authorization": "",
+                        "Cache-Control": "",
+                        "Connection": ""
+                    },
+                    "http_agent": "",
+                    "method": "",
+                    "mode": ,
+                    "owner": ,
+                    "regexp": ,
+                    "remote_src": ,
+                    "removes": ,
+                    "return_content": ,
+                    "selevel": ,
+                    "serole": ,
+                    "setype": ,
+                    "seuser": ,
+                    "src": ,
+                    "status_code": [],
+                    "timeout": ,
+                    "unix_socket": ,
+                    "unsafe_writes": ,
+                    "url": "",
+                    "url_password": ,
+                    "url_username": ,
+                    "use_proxy": ,
+                    "validate_certs": 
+                }
+            },
+            "item": {
+                "key": ,
+                "value": {
+                    "descr": "",
+                    "name": "",
+                    "pid": "",
+                    "sn": "",
+                    "vid": ""
+                }
+            },
+            "json": {
+                "pagination_response_record": {
+                    "last_index": ,
+                    "page_index": ,
+                    "page_records": ,
+                    "self_link": "",
+                    "title": "Get Coverage Summary by Serial Numbers - SN2INFO API",
+                    "total_records": 1
+                },
+                "serial_numbers": [
+                    {
+                        "base_pid_list": [
+                            {
+                                "base_pid": ""
+                            }
+                        ],
+                        "contract_site_address1": "",
+                        "contract_site_city": "",
+                        "contract_site_country": "",
+                        "contract_site_customer_name": "",
+                        "contract_site_state_province": "",
+                        "covered_product_line_end_date": "",
+                        "id": "",
+                        "is_covered": "",
+                        "orderable_pid_list": [
+                            {
+                                "item_description": "",
+                                "item_position": "",
+                                "item_type": "",
+                                "orderable_pid": "",
+                                "pillar_code": ""
+                            }
+                        ],
+                        "parent_sr_no": "",
+                        "service_contract_number": "",
+                        "service_line_descr": "",
+                        "sr_no": "",
+                        "warranty_end_date": "",
+                        "warranty_type": "",
+                        "warranty_type_description": ""
+                    }
+                ]
+            },
+            "msg": "",
+            "redirected": ,
+            "status": ,
+            "strict_transport_security": "",
+            "transfer_encoding": "",
+            "url": "",
+            "x_mashery_message_id": "",
+            "x_rp_ssl_name": ""
+        },
+    ],
+}

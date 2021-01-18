@@ -1,0 +1,13 @@
+{% if item == "csv" %}
+Hostname,Base PID,Product Name,Software Type,Installed Version,Recommended Version,Release Date,Release Lifecycle
+{%     for product in RecommendedRelease.json.productList %}
+{{ inventory_hostname }},{{ product.product.basePID | default('N/A') }},{{ product.product.productName | default('N/A') | regex_replace(","," ") }},{{ product.product.softwareType | default('N/A') }},{{ ansible_facts.net_version }},{{ product.suggestions[0].releaseFormat2 }},{{ product.suggestions[0].releaseDate }},{{ product.suggestions[0].releaseLifeCycle }}
+{%     endfor %}
+{% else %}
+# Cisco Recommended Release Facts for {{ inventory_hostname }}
+| Hostname | Base PID | Product Name | Software Type | Installed Version | Recommended Version | Release Date | Release Lifecycle |
+| -------- | -------- | ------------ | ------------- | ----------------- | ------------------- | ------------ | ----------------- |
+{%     for product in RecommendedRelease.json.productList %}
+| {{ inventory_hostname }} | {{ product.product.basePID | default('N/A') }} | {{ product.product.productName | default('N/A') | regex_replace(","," ") }} | {{ product.product.softwareType | default('N/A') }} | {{ ansible_facts.net_version }} | {{ product.suggestions[0].releaseFormat2 }} | {{ product.suggestions[0].releaseDate }} | {{ product.suggestions[0].releaseLifeCycle }} |
+{%     endfor %}
+{% endif %}

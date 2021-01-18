@@ -1,0 +1,115 @@
+---
+
+- hosts: Campus
+  vars_prompt:
+    - name: IOS_User_Prompt
+      prompt: "Enter Cisco IOS Username"
+      private: no 
+    - name: IOS_Password_Prompt
+      prompt: "Enter IOS Password"
+      private: yes   
+    - name: client_id
+      prompt: "Enter Client ID"
+      private: yes
+    - name: client_secret
+      prompt: "Enter Client Secret"
+      private: yes         
+  tasks:
+# Register Username and Password #
+    - set_fact:   
+        ios_user: "{{ IOS_User_Prompt }}"     
+        ios_password: "{{ IOS_Password_Prompt }}"
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"        
+      no_log: true
+      delegate_to: localhost
+      run_once: true   
+
+# Run Show inventory and register results #
+    - name: show inventory 
+      ios_command:
+        commands:
+          - show inventory
+      register: inventory_raw
+
+# PARSE #
+    - name: Set Fact Genie Filter - show inventory
+      set_fact:
+        pyats_inventory: "{{ inventory_raw.stdout[0] | parse_genie(command='show inventory', os='ios', platform='cat6k') }}"
+
+# GET TOKEN #
+    - name: PUT Get Token
+      uri:
+        url: https://cloudsso.cisco.com/as/token.oauth2?grant_type=client_credentials&client_id={{client_id}}&client_secret={{client_secret}}
+        headers: 
+          Accept-Encoding: gzip, deflate, br
+          Accept: application/json
+          Content-Type: application/x-www-form-urlencoded
+          User-Agent: Jakarta Commons-HttpClient/3.1
+          host: cloudsso.cisco.com
+          Connection: keep-alive
+          Content-Length: 0
+        method: POST
+        return_content: yes
+        validate_certs: no
+        force_basic_auth: yes
+        follow_redirects: yes
+        body_format: json
+      register: token
+
+# SET TOKEN #
+    - name: Set JSON
+      set_fact:
+        token_type: "{{ token.json.token_type }}"
+        access_token: "{{ token.json.access_token }}"
+
+# GET SERIAL 2 INFO #
+    - name: GET Serial to Info
+      uri:
+        url: https://api.cisco.com/sn2info/v2/coverage/summary/serial_numbers/{{ item.value.sn }}
+        method: GET
+        headers: 
+          Authorization: "{{token_type}} {{access_token}}"
+          Cache-Control: no-cache
+          Accept-Encoding: gzip, deflate, br
+          Connection: keep-alive
+          Accept: application/json 
+        return_content: yes
+        validate_certs: no
+        force_basic_auth: yes
+        follow_redirects: yes
+      register: Serial2Info
+      loop: "{{ pyats_inventory.index | dict2items }}"
+
+# Create Nice JSON, Nice YAML Files #
+# Create JSON file with Ansible Facts #
+    - name: Create raw JSON file
+      copy: 
+        content: | 
+          {{ Serial2Info | to_nice_json }}
+        dest: ../documentation/{{ inventory_hostname }}_Serial2Contract.json
+
+# Create YAML file with Ansible Facts #
+    - name: Create raw YAML
+      copy: 
+        content: | 
+          {{ Serial2Info | to_nice_yaml }}
+        dest: ../documentation/{{ inventory_hostname }}_Serial2Contract.yml
+
+# Add Headers to YAML #
+    - name: Header Row
+      lineinfile:
+        path: ../documentation/{{ inventory_hostname }}_Serial2Contract.yml
+        insertbefore: BOF
+        line: ---        
+      delegate_to: localhost    
+
+# Create CSV and MD File #
+# Create MAC CSV and MD file with results #
+    - name: CSV and MD using Jinja templates
+      template:
+        src: ../templates/Serial2InfoFacts.j2
+        dest: ../documentation/{{ inventory_hostname }}_Serial2Contract.{{ item }}
+      loop: 
+        - csv
+        - md            

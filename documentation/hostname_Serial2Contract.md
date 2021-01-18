@@ -1,0 +1,3 @@
+# Cisco Serial Number Facts for HOSTNAME
+| Hostname | Description | Base PID | Order PID | Serial Number | Service Contract Number | Service Level | Contract Address | Contract City | Contract Country | Contract Province | Contract Customer Name | Product End Line End Date | Is Covered |
+| -------- | ----------- | -------- | --------- | ------------- | ----------------------- | ------------- | ---------------- | ------------- | ---------------- | ----------------- | ---------------------- | ------------------------- | -----------|
