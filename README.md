@@ -2,6 +2,8 @@
 
 ## Written by John Capobianco, Francois Daigle, and Devin Sloan
 
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/automateyournetwork/Cisco_API_v2)
+
 Cisco has several APIs to get different information returned in JSON format. Using the Ansible URI Module you can access these APIs, query the JSON output, and create formatted CSV files. 
 
 [Support API](https://developer.cisco.com/site/support-apis/)
